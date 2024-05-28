@@ -1,15 +1,15 @@
 {
   "log": {
-    "level": "info",
+    "level": "warn",
     "timestamp": true
   },
   "experimental": {
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
+      "secret": "",
       "external_ui_download_url": "https://ghproxy.net/https://github.com/MetaCubeX/Yacd-meta/archive/gh-pages.zip",
       "external_ui_download_detour": "🐢 直连",
-      "secret": "",
       "default_mode": "rule"
     },
     "cache_file": {
@@ -39,7 +39,7 @@
       },
       {
         "tag": "阻断DNS",
-        "address": "rcode://refused"
+        "address": "rcode://success"
       }
     ],
     "rules": [
@@ -52,7 +52,10 @@
         "server": "阻断DNS"
       },
       {
-        "rule_set": ["geoip_cn", "geosite_cn"],
+        "rule_set": [
+          "geoip_cn", 
+        "geosite_cn"
+      ],
         "server": "国内DNS"
       },
       {
@@ -78,28 +81,28 @@
       }
     ],
     "strategy": "prefer_ipv4",
-    "disable_cache": false,
-    "disable_expire": false,
     "independent_cache": true
   },
   "inbounds": [
     {
+      "tag": "tun",
       "type": "tun",
-      "inet4_address": "172.19.0.1/30",
-      "auto_route": true,
-      "strict_route": false,
+      "inet4_address": "172.19.0.0/30",
       "stack": "mixed",
+      "strict_route": true,
+      "auto_route": true,
+      "sniff": true,
       "exclude_package": ["com.android.captiveportallogin"],
       "platform": {
         "http_proxy": {
           "enabled": true,
           "server": "127.0.0.1",
           "server_port": 7890
+        }      
         }
-      },
-      "sniff": true
     },
     {
+      "tag": "mixed",
       "type": "mixed",
       "listen": "127.0.0.1",
       "listen_port": 7890,
