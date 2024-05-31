@@ -20,18 +20,21 @@
   "dns": {
     "fakeip": {
       "enabled": true,
-      "inet4_range": "198.18.0.0/15"
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
     },
     "servers": [
       {
         "tag": "国际DNS",
         "address": "https://8.8.8.8/dns-query",
-        "detour": "🚀 默认出站"
+        "detour": "🚀 默认出站",
+        "strategy": "prefer_ipv6"
       },
       {
         "tag": "国内DNS",
-        "address": "https://223.5.5.5/dns-query",
-        "detour": "🐢 直连"
+        "address": "https://1.12.12.12/dns-query",
+        "detour": "🐢 直连",
+        "strategy": "ipv4_only"
       },
       {
         "tag": "fakeip",
@@ -52,10 +55,7 @@
         "server": "阻断DNS"
       },
       {
-        "rule_set": [
-          "geoip_cn",
-          "geosite_cn"
-        ],
+        "rule_set": ["geoip_cn", "geosite_cn"],
         "server": "国内DNS"
       },
       {
@@ -71,13 +71,12 @@
         "server": "国际DNS"
       }
     ],
-    "strategy": "ipv4_only",
     "independent_cache": true
   },
   "inbounds": [
     {
-      "type": "tproxy",
       "tag": "tproxy-in",
+      "type": "tproxy",
       "listen": "::",
       "listen_port": 1536,
       "tcp_fast_open": true,
@@ -117,9 +116,7 @@
     {
       "tag": "⚡ 日韩新",
       "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
+      "outbounds": ["{all}"],
       "interrupt_exist_connections": true,
       "filter": [
         {
@@ -136,9 +133,7 @@
     {
       "tag": "📌 单选节点",
       "type": "selector",
-      "outbounds": [
-        "{all}"
-      ],
+      "outbounds": ["{all}"],
       "interrupt_exist_connections": true,
       "filter": [
         {
@@ -151,6 +146,23 @@
     },
     {
       "tag": "📥 Download",
+      "type": "selector",
+      "outbounds": [
+        "🚀 默认出站",
+        "⚡ 日韩新",
+        "🐢 直连",
+        "📌 单选节点",
+        "🇭🇰 香港节点",
+        "🇯🇵 日本节点",
+        "🇰🇷 韩国节点",
+        "🇹🇼 台湾节点",
+        "🇸🇬 新加坡节点",
+        "🇺🇸 美国节点"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "💻 SSH",
       "type": "selector",
       "outbounds": [
         "🚀 默认出站",
@@ -339,16 +351,12 @@
     {
       "tag": "🇭🇰 香港节点",
       "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
+      "outbounds": ["{all}"],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": [
-            "🇭🇰|香港|HK|Hong Kong"
-          ]
+          "keywords": ["🇭🇰|香港|HK|Hong Kong"]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -358,16 +366,12 @@
     {
       "tag": "🇯🇵 日本节点",
       "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
+      "outbounds": ["{all}"],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": [
-            "🇯🇵|日本|JP|Japan"
-          ]
+          "keywords": ["🇯🇵|日本|JP|Japan"]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -377,16 +381,12 @@
     {
       "tag": "🇰🇷 韩国节点",
       "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
+      "outbounds": ["{all}"],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": [
-            "🇰🇷|韩国|KR|South Korea"
-          ]
+          "keywords": ["🇰🇷|韩国|KR|South Korea"]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -396,16 +396,12 @@
     {
       "tag": "🇹🇼 台湾节点",
       "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
+      "outbounds": ["{all}"],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": [
-            "🇹🇼|台湾|TW|Taiwan"
-          ]
+          "keywords": ["🇹🇼|台湾|TW|Taiwan"]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -415,16 +411,12 @@
     {
       "tag": "🇸🇬 新加坡节点",
       "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
+      "outbounds": ["{all}"],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": [
-            "🇸🇬|新加坡|SG|Singapore"
-          ]
+          "keywords": ["🇸🇬|新加坡|SG|Singapore"]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -434,16 +426,12 @@
     {
       "tag": "🇺🇸 美国节点",
       "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
+      "outbounds": ["{all}"],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": [
-            "🇺🇸|美国|US|USA|United States"
-          ]
+          "keywords": ["🇺🇸|美国|US|USA|United States"]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -515,19 +503,18 @@
         "mode": "and",
         "rules": [
           {
-            "rule_set": [
-              "download-process"
-            ]
+            "rule_set": ["download-process"]
           },
           {
-            "rule_set": [
-              "geoip_cn",
-              "geosite_cn"
-            ],
+            "rule_set": ["geoip_cn", "geosite_cn"],
             "invert": true
           }
         ],
         "outbound": "📥 Download"
+      },
+      {
+        "process_name": ["ssh", "ssh.exe"],
+        "outbound": "💻 SSH"
       },
       {
         "rule_set": "geosite_apple",
@@ -542,29 +529,19 @@
         "outbound": "🎮 Game"
       },
       {
-        "rule_set": [
-          "geosite_googlefcm"
-        ],
+        "rule_set": ["geosite_googlefcm"],
         "outbound": "🔎 GoogleFCM"
       },
       {
-        "rule_set": [
-          "geosite_google@cn"
-        ],
+        "rule_set": ["geosite_google@cn", "geosite_youtube@cn"],
         "outbound": "🐢 直连"
       },
       {
-        "rule_set": [
-          "geoip_google",
-          "geosite_google"
-        ],
+        "rule_set": ["geoip_google", "geosite_google", "geosite_youtube"],
         "outbound": "🔎 Google"
       },
       {
-        "rule_set": [
-          "geoip_facebook",
-          "geosite_meta"
-        ],
+        "rule_set": ["geoip_facebook", "geosite_meta"],
         "outbound": "🥽 Meta"
       },
       {
@@ -588,10 +565,7 @@
         "outbound": "🪟 Microsoft"
       },
       {
-        "rule_set": [
-          "geoip_telegram",
-          "geosite_telegram"
-        ],
+        "rule_set": ["geoip_telegram", "geosite_telegram"],
         "outbound": "✈️ Telegram"
       },
       {
@@ -599,10 +573,7 @@
         "outbound": "🚀 默认出站"
       },
       {
-        "rule_set": [
-          "geoip_cn",
-          "geosite_cn"
-        ],
+        "rule_set": ["geoip_cn", "geosite_cn"],
         "outbound": "🐢 直连"
       }
     ],
@@ -684,6 +655,22 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/google.srs",
+        "download_detour": "🐢 直连",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "geosite_youtube",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/youtube.srs",
+        "download_detour": "🐢 直连",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "geosite_youtube@cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/youtube@cn.srs",
         "download_detour": "🐢 直连",
         "update_interval": "3d"
       },

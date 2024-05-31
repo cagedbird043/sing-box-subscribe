@@ -17,23 +17,25 @@
       "store_fakeip": true
     }
   },
-  "dns": {    
+  "dns": {
     "fakeip": {
-    "enabled": true,
-    "inet4_range": "198.18.0.0/15",
-    "inet6_range": "fc00::/18"
-  },
+      "enabled": true,
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
+    },
     "servers": [
       {
         "tag": "国际DNS",
         "address": "https://8.8.8.8/dns-query",
-        "detour": "🚀 默认出站"
+        "detour": "🚀 默认出站",
+        "strategy": "prefer_ipv6"
       },
       {
         "tag": "国内DNS",
-        "address": "https://223.5.5.5/dns-query",
-        "detour": "🐢 直连"
-      },      
+        "address": "https://1.12.12.12/dns-query",
+        "detour": "🐢 直连",
+        "strategy": "ipv4_only"
+      },
       {
         "tag": "fakeip",
         "address": "fakeip"
@@ -63,13 +65,10 @@
       {
         "clash_mode": "global",
         "server": "国际DNS"
-      },      
+      },
       {
         "inbound": "tun",
-        "query_type": [
-          "A",
-          "AAAA"
-        ],
+        "query_type": ["A", "AAAA"],
         "server": "fakeip",
         "rewrite_ttl": 1
       },
@@ -78,7 +77,6 @@
         "server": "国际DNS"
       }
     ],
-    "strategy": "ipv4_only",
     "independent_cache": true
   },
   "inbounds": [
@@ -86,7 +84,7 @@
       "tag": "tun",
       "type": "tun",
       "inet4_address": "172.19.0.0/30",
-      "inet6_address": "fdfe:dcba:9876::0/126",
+      "inet6_address": "fdfe:dcba:9876::1/126",
       "stack": "mixed",
       "strict_route": true,
       "auto_route": true,
@@ -97,8 +95,8 @@
           "enabled": true,
           "server": "0.0.0.0",
           "server_port": 7890
-        }      
         }
+      }
     },
     {
       "tag": "mixed",
@@ -158,6 +156,23 @@
     },
     {
       "tag": "📥 Download",
+      "type": "selector",
+      "outbounds": [
+        "🚀 默认出站",
+        "⚡ 日韩新",
+        "🐢 直连",
+        "📌 单选节点",
+        "🇭🇰 香港节点",
+        "🇯🇵 日本节点",
+        "🇰🇷 韩国节点",
+        "🇹🇼 台湾节点",
+        "🇸🇬 新加坡节点",
+        "🇺🇸 美国节点"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "💻 SSH",
       "type": "selector",
       "outbounds": [
         "🚀 默认出站",
@@ -498,19 +513,18 @@
         "mode": "and",
         "rules": [
           {
-            "rule_set": [
-              "download-process"
-            ]
+            "rule_set": ["download-process"]
           },
           {
-            "rule_set": [
-              "geoip_cn",
-              "geosite_cn"
-            ],
+            "rule_set": ["geoip_cn", "geosite_cn"],
             "invert": true
           }
         ],
         "outbound": "📥 Download"
+      },
+      {
+        "process_name": ["ssh", "ssh.exe"],
+        "outbound": "💻 SSH"
       },
       {
         "rule_set": "geosite_apple",
@@ -525,29 +539,19 @@
         "outbound": "🎮 Game"
       },
       {
-        "rule_set": [
-          "geosite_googlefcm"
-        ],
+        "rule_set": ["geosite_googlefcm"],
         "outbound": "🔎 GoogleFCM"
       },
       {
-        "rule_set": [
-          "geosite_google@cn"
-        ],
+        "rule_set": ["geosite_google@cn", "geosite_youtube@cn"],
         "outbound": "🐢 直连"
       },
       {
-        "rule_set": [
-          "geoip_google",
-          "geosite_google"
-        ],
+        "rule_set": ["geoip_google", "geosite_google", "geosite_youtube"],
         "outbound": "🔎 Google"
       },
       {
-        "rule_set": [
-          "geoip_facebook",
-          "geosite_meta"
-        ],
+        "rule_set": ["geoip_facebook", "geosite_meta"],
         "outbound": "🥽 Meta"
       },
       {
@@ -571,10 +575,7 @@
         "outbound": "🪟 Microsoft"
       },
       {
-        "rule_set": [
-          "geoip_telegram",
-          "geosite_telegram"
-        ],
+        "rule_set": ["geoip_telegram", "geosite_telegram"],
         "outbound": "✈️ Telegram"
       },
       {
@@ -582,10 +583,7 @@
         "outbound": "🚀 默认出站"
       },
       {
-        "rule_set": [
-          "geoip_cn",
-          "geosite_cn"
-        ],
+        "rule_set": ["geoip_cn", "geosite_cn"],
         "outbound": "🐢 直连"
       }
     ],
@@ -667,6 +665,22 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/google.srs",
+        "download_detour": "🐢 直连",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "geosite_youtube",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/youtube.srs",
+        "download_detour": "🐢 直连",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "geosite_youtube@cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/youtube@cn.srs",
         "download_detour": "🐢 直连",
         "update_interval": "3d"
       },
