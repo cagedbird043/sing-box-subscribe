@@ -346,6 +346,23 @@
       "interrupt_exist_connections": true
     },
     {
+      "tag": "📷 Imgur",
+      "type": "selector",
+      "outbounds": [
+        "🚀 默认出站",
+        "⚡ 日韩新",
+        "🐢 直连",
+        "📌 单选节点",
+        "🇭🇰 香港节点",
+        "🇯🇵 日本节点",
+        "🇰🇷 韩国节点",
+        "🇹🇼 台湾节点",
+        "🇸🇬 新加坡节点",
+        "🇺🇸 美国节点"
+      ],
+      "interrupt_exist_connections": true
+    },
+    {
       "tag": "🇭🇰 香港节点",
       "type": "urltest",
       "outbounds": ["{all}"],
@@ -566,6 +583,10 @@
         "outbound": "✈️ Telegram"
       },
       {
+        "rule_set": ["geosite_imgur"],
+        "outbound": "📷 Imgur"
+      },
+      {
         "rule_set": "geosite_geolocation-!cn",
         "outbound": "🚀 默认出站"
       },
@@ -740,6 +761,14 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/telegram.srs",
+        "download_detour": "🐢 直连",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "geosite_imgur",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/imgur.srs",
         "download_detour": "🐢 直连",
         "update_interval": "3d"
       },
