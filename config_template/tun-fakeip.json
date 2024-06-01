@@ -513,6 +513,10 @@
         "outbound": "🐢 直连"
       },
       {
+        "process_name": ["Overwatch.exe"],
+        "outbound": "🐢 直连"
+      },
+      {
         "rule_set": "geosite_category-ads-all",
         "outbound": "🚫 阻断"
       },
