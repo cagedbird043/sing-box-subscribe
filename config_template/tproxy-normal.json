@@ -206,23 +206,6 @@
       "interrupt_exist_connections": true
     },
     {
-      "tag": "🔎 Gemini",
-      "type": "selector",
-      "outbounds": [
-        "🚀 默认出站",
-        "⚡ 日韩新",
-        "🐢 直连",
-        "📌 单选节点",
-        "🇭🇰 香港节点",
-        "🇯🇵 日本节点",
-        "🇰🇷 韩国节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
-      ],
-      "interrupt_exist_connections": true
-    },
-    {
       "tag": "🔎 GoogleFCM",
       "type": "selector",
       "outbounds": [
@@ -558,7 +541,10 @@
       {
         "process_name": [
           "com.google.android.apps.bard",
-          "com.google.android.googlequicksearchbox"
+          "com.google.android.googlequicksearchbox",
+          "com.google.android.apps.googleassistant",
+          "com.android.hotwordenrollment.xgoogle",
+          "com.android.hotwordenrollment.okgoogle"
         ],
         "outbound": "🔎 Gemini"
       },
