@@ -539,16 +539,6 @@
         "outbound": "🎮 Game"
       },
       {
-        "process_name": [
-          "com.google.android.apps.bard",
-          "com.google.android.googlequicksearchbox",
-          "com.google.android.apps.googleassistant",
-          "com.android.hotwordenrollment.xgoogle",
-          "com.android.hotwordenrollment.okgoogle"
-        ],
-        "outbound": "🔎 Gemini"
-      },
-      {
         "rule_set": ["geosite_googlefcm"],
         "outbound": "🔎 GoogleFCM"
       },
