@@ -55,7 +55,10 @@
         "server": "阻断DNS"
       },
       {
-        "rule_set": ["geoip_cn", "geosite_cn"],
+        "rule_set": [
+          "geoip_cn",
+          "geosite_cn"
+        ],
         "server": "国内DNS"
       },
       {
@@ -68,7 +71,10 @@
       },
       {
         "inbound": "tun",
-        "query_type": ["A", "AAAA"],
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
         "server": "fakeip",
         "rewrite_ttl": 1
       },
@@ -83,13 +89,52 @@
     {
       "tag": "tun",
       "type": "tun",
-      "inet4_address": "172.19.0.0/30",
-      "inet6_address": "fdfe:dcba:9876::1/126",
+      "address": [
+        "172.19.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
       "stack": "mixed",
       "strict_route": true,
       "auto_route": true,
       "sniff": true,
-      "exclude_package": ["com.android.captiveportallogin"],
+      "exclude_package": [
+        "com.android.captiveportallogin",
+        "com.zmzx.college.search",
+        "com.ss.android.ugc.aweme",
+        "me.ele",
+        "app.fywifi.android",
+        "com.autonavi.minimap",
+        "com.huawei.genexcloud.speedtest",
+        "com.wisedu.cpdaily",
+        "com.jingdong.app.mall",
+        "com.jd.jrapp",
+        "com.coolapk.market",
+        "com.sankuai.meituan.takeoutnew",
+        "com.xiaomi.smarthome",
+        "com.maimemo.android.momo",
+        "com.qianyan.eudic",
+        "com.xunmeng.pinduoduo",
+        "com.taobao.taobao",
+        "com.chinarailway.globalticketing",
+        "com.tencent.mm",
+        "com.taobao.idlefish",
+        "ctrip.android.view",
+        "com.chaoxing.mobile",
+        "com.unionpay",
+        "com.eg.android.AlipayGphone",
+        "com.able.wisdomtree",
+        "com.ct.client",
+        "com.greenpoint.android.mc10086.activity",
+        "com.chinamworld.bocmbci",
+        "com.bilibili.app.in",
+        "com.huawei.hwid",
+        "org.localsend.localsend_app",
+        "com.qcymall.googleearphonesetup",
+        "com.tencent.mobileqq",
+        "com.omarea.vtools",
+        "com.taptap",
+        "cn.unipus.ucampus.student"
+      ],
       "platform": {
         "http_proxy": {
           "enabled": true,
@@ -126,7 +171,9 @@
     {
       "tag": "⚡ 日韩新",
       "type": "urltest",
-      "outbounds": ["{all}"],
+      "outbounds": [
+        "{all}"
+      ],
       "interrupt_exist_connections": true,
       "filter": [
         {
@@ -143,7 +190,9 @@
     {
       "tag": "📌 单选节点",
       "type": "selector",
-      "outbounds": ["{all}"],
+      "outbounds": [
+        "{all}"
+      ],
       "interrupt_exist_connections": true,
       "filter": [
         {
@@ -378,12 +427,16 @@
     {
       "tag": "🇭🇰 香港节点",
       "type": "urltest",
-      "outbounds": ["{all}"],
+      "outbounds": [
+        "{all}"
+      ],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": ["🇭🇰|香港|HK|Hong Kong"]
+          "keywords": [
+            "🇭🇰|香港|HK|Hong Kong"
+          ]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -393,12 +446,16 @@
     {
       "tag": "🇯🇵 日本节点",
       "type": "urltest",
-      "outbounds": ["{all}"],
+      "outbounds": [
+        "{all}"
+      ],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": ["🇯🇵|日本|JP|Japan"]
+          "keywords": [
+            "🇯🇵|日本|JP|Japan"
+          ]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -408,12 +465,16 @@
     {
       "tag": "🇰🇷 韩国节点",
       "type": "urltest",
-      "outbounds": ["{all}"],
+      "outbounds": [
+        "{all}"
+      ],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": ["🇰🇷|韩国|KR|South Korea"]
+          "keywords": [
+            "🇰🇷|韩国|KR|South Korea"
+          ]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -423,12 +484,16 @@
     {
       "tag": "🇹🇼 台湾节点",
       "type": "urltest",
-      "outbounds": ["{all}"],
+      "outbounds": [
+        "{all}"
+      ],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": ["🇹🇼|台湾|TW|Taiwan"]
+          "keywords": [
+            "🇹🇼|台湾|TW|Taiwan"
+          ]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -438,12 +503,16 @@
     {
       "tag": "🇸🇬 新加坡节点",
       "type": "urltest",
-      "outbounds": ["{all}"],
+      "outbounds": [
+        "{all}"
+      ],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": ["🇸🇬|新加坡|SG|Singapore"]
+          "keywords": [
+            "🇸🇬|新加坡|SG|Singapore"
+          ]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -453,12 +522,16 @@
     {
       "tag": "🇺🇸 美国节点",
       "type": "urltest",
-      "outbounds": ["{all}"],
+      "outbounds": [
+        "{all}"
+      ],
       "interrupt_exist_connections": true,
       "filter": [
         {
           "action": "include",
-          "keywords": ["🇺🇸|美国|US|USA|United States"]
+          "keywords": [
+            "🇺🇸|美国|US|USA|United States"
+          ]
         }
       ],
       "url": "https://www.gstatic.com/generate_204",
@@ -513,7 +586,9 @@
         "outbound": "🐢 直连"
       },
       {
-        "process_name": ["Overwatch.exe"],
+        "process_name": [
+          "Overwatch.exe"
+        ],
         "outbound": "🐢 直连"
       },
       {
@@ -534,17 +609,25 @@
         "mode": "and",
         "rules": [
           {
-            "rule_set": ["download-process"]
+            "rule_set": [
+              "download-process"
+            ]
           },
           {
-            "rule_set": ["geoip_cn", "geosite_cn"],
+            "rule_set": [
+              "geoip_cn",
+              "geosite_cn"
+            ],
             "invert": true
           }
         ],
         "outbound": "📥 Download"
       },
       {
-        "process_name": ["ssh", "ssh.exe"],
+        "process_name": [
+          "ssh",
+          "ssh.exe"
+        ],
         "outbound": "💻 SSH"
       },
       {
@@ -560,19 +643,31 @@
         "outbound": "🎮 Game"
       },
       {
-        "rule_set": ["geosite_googlefcm"],
+        "rule_set": [
+          "geosite_googlefcm"
+        ],
         "outbound": "🔎 GoogleFCM"
       },
       {
-        "rule_set": ["geosite_google@cn", "geosite_youtube@cn"],
+        "rule_set": [
+          "geosite_google@cn",
+          "geosite_youtube@cn"
+        ],
         "outbound": "🐢 直连"
       },
       {
-        "rule_set": ["geoip_google", "geosite_google", "geosite_youtube"],
+        "rule_set": [
+          "geoip_google",
+          "geosite_google",
+          "geosite_youtube"
+        ],
         "outbound": "🔎 Google"
       },
       {
-        "rule_set": ["geoip_facebook", "geosite_meta"],
+        "rule_set": [
+          "geoip_facebook",
+          "geosite_meta"
+        ],
         "outbound": "🥽 Meta"
       },
       {
@@ -596,11 +691,16 @@
         "outbound": "🪟 Microsoft"
       },
       {
-        "rule_set": ["geoip_telegram", "geosite_telegram"],
+        "rule_set": [
+          "geoip_telegram",
+          "geosite_telegram"
+        ],
         "outbound": "✈️ Telegram"
       },
       {
-        "rule_set": ["geosite_imgur"],
+        "rule_set": [
+          "geosite_imgur"
+        ],
         "outbound": "📷 Imgur"
       },
       {
@@ -608,7 +708,10 @@
         "outbound": "🚀 默认出站"
       },
       {
-        "rule_set": ["geoip_cn", "geosite_cn"],
+        "rule_set": [
+          "geoip_cn",
+          "geosite_cn"
+        ],
         "outbound": "🐢 直连"
       }
     ],
