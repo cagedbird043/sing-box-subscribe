@@ -129,11 +129,14 @@
         "com.bilibili.app.in",
         "com.huawei.hwid",
         "org.localsend.localsend_app",
+        "org.kde.kdeconnect_tp",
         "com.qcymall.googleearphonesetup",
         "com.tencent.mobileqq",
         "com.omarea.vtools",
         "com.taptap",
-        "cn.unipus.ucampus.student"
+        "cn.unipus.ucampus.student",
+        "net.oneplus.weather",
+        "com.coloros.weather.service"
       ],
       "platform": {
         "http_proxy": {
