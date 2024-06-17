@@ -26,13 +26,13 @@
     "servers": [
       {
         "tag": "国际DNS",
-        "address": "https://8.8.8.8/dns-query",
+        "address": "h3://8.8.8.8/dns-query",
         "detour": "🚀 默认出站",
         "strategy": "prefer_ipv6"
       },
       {
         "tag": "国内DNS",
-        "address": "https://1.12.12.12/dns-query",
+        "address": "dhcp://auto",
         "detour": "🐢 直连",
         "strategy": "ipv4_only"
       },
