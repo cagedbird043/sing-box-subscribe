@@ -679,10 +679,6 @@
         "outbound": "DNS"
       },
       {
-        "protocol": "quic",
-        "outbound": "🚫 阻断"
-      },
-      {
         "clash_mode": "direct",
         "outbound": "🐢 直连"
       },
