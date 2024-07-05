@@ -28,7 +28,7 @@
         "tag": "local-dns",
         "address": "tls://223.5.5.5",
         "detour": "🐢 直连"
-      }
+      },
       {
         "tag": "block-dns",
         "address": "rcode://refused"
