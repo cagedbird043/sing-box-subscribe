@@ -9,7 +9,7 @@
       "external_controller": "0.0.0.0:9090",
       "external_ui": "ui",
       "secret": "",
-      "external_ui_download_url": "https://ghproxy.net/https://github.com/MetaCubeX/Yacd-meta/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_url": "https://cdn.jsdelivr.net/gh/DustinWin/clash_singbox-tools@main/Clash-dashboard/metacubexd.tar.gz",
       "external_ui_download_detour": "🐢 直连",
       "default_mode": "rule"
     },
@@ -21,12 +21,12 @@
     "servers": [
       {
         "tag": "remote-dns",
-        "address": "tls://8.8.8.8",
+        "address": "tls://1.1.1.1",
         "detour": "🚀 默认出站"
       },
       {
         "tag": "local-dns",
-        "address": "tls://223.5.5.5",
+        "address": "dhcp://auto",
         "detour": "🐢 直连"
       },
       {
@@ -67,7 +67,7 @@
       }
     ],
     "final": "remote-dns",
-    "strategy": "ipv4_only",
+    "strategy": "prefer_ipv4",
     "disable_cache": false,
     "disable_expire": false,
     "independent_cache": true,
@@ -83,14 +83,55 @@
   "inbounds": [
     {
       "type": "tun",
-      "inet4_address": "172.19.0.1/30",
+      "address": [
+        "172.19.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
       "gso": false,
       "auto_route": true,
       "strict_route": true,
       "endpoint_independent_nat": false,
       "stack": "mixed",
       "exclude_package": [
-        "com.google.android.captiveportallogin"
+        "com.google.android.captiveportallogin",
+        "com.tencent.mm",
+        "com.xunmeng.pinduoduo",
+        "com.zmzx.college.search",
+        "com.ss.android.ugc.aweme",
+        "me.ele",
+        "com.huawei.genexcloud.speedtest",
+        "com.wisedu.cpdaily",
+        "com.jingdong.app.mall",
+        "com.jd.jrapp",
+        "com.sankuai.meituan.takeoutnew",
+        "com.xiaomi.smarthome",
+        "com.maimemo.android.momo",
+        "com.qianyan.eudic",
+        "com.xunmeng.pinduoduo",
+        "com.taobao.taobao",
+        "com.chinarailway.globalticketing",
+        "com.tencent.mm",
+        "com.taobao.idlefish",
+        "ctrip.android.view",
+        "com.chaoxing.mobile",
+        "com.unionpay",
+        "com.eg.android.AlipayGphone",
+        "com.able.wisdomtree",
+        "com.ct.client",
+        "com.greenpoint.android.mc10086.activity",
+        "com.chinamworld.bocmbci",
+        "com.bilibili.app.in",
+        "com.huawei.hwid",
+        "org.localsend.localsend_app",
+        "org.kde.kdeconnect_tp",
+        "com.qcymall.googleearphonesetup",
+        "com.tencent.mobileqq",
+        "com.omarea.vtools",
+        "com.taptap",
+        "cn.unipus.ucampus.student",
+        "net.oneplus.weather",
+        "com.coloros.weather.service",
+        "com.limelight"
       ],
       "platform": {
         "http_proxy": {
@@ -100,14 +141,14 @@
         }
       },
       "sniff": true,
-      "sniff_override_destination": false
+      "sniff_override_destination": true
     },
     {
       "type": "mixed",
       "listen": "0.0.0.0",
       "listen_port": 7890,
       "sniff": true,
-      "sniff_override_destination": false
+      "sniff_override_destination": true
     }
   ],
   "outbounds": [
@@ -115,9 +156,7 @@
       "tag": "🚀 默认出站",
       "type": "selector",
       "outbounds": [
-        "⚡ 日韩新",
-        "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
+        "🇭🇰 香港专线",
         "🐢 直连",
         "📌 单选节点1",
         "📌 单选节点2",
@@ -127,66 +166,10 @@
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
         "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
+        "🇺🇸 美国节点",
+        "⚡ 日韩台新美"
       ],
       "interrupt_exist_connections": true
-    },
-    {
-      "tag": "⚡ 日韩新",
-      "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
-      "interrupt_exist_connections": true,
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇯🇵|日本|JP|Japan|🇰🇷|韩国|KR|South Korea|🇸🇬|新加坡|SG|Singapore"
-          ]
-        }
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "10m",
-      "tolerance": 0
-    },
-    {
-      "tag": "⚡ 日韩台新美",
-      "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
-      "interrupt_exist_connections": true,
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇯🇵|日本|JP|Japan|🇰🇷|韩国|KR|South Korea|🇸🇬|新加坡|SG|Singapore|🇹🇼|台湾|TW|Taiwan|🇺🇸|美国|US|USA|United States"
-          ]
-        }
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "10m",
-      "tolerance": 0
-    },
-    {
-      "tag": "🤖 ChatGPT解锁",
-      "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
-      "interrupt_exist_connections": true,
-      "filter": [
-        {
-          "action": "exclude",
-          "keywords": [
-            "🇭🇰|香港|HK|Hong Kong|剩余|流量|有效|时间|到期|expire|地址|网址|官网|自动|最优|最快"
-          ]
-        }
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "10m",
-      "tolerance": 0
     },
     {
       "tag": "📌 单选节点1",
@@ -240,11 +223,9 @@
       "tag": "💻 SSH",
       "type": "selector",
       "outbounds": [
-        "🚀 默认出站",
-        "⚡ 日韩新",
-        "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
         "🐢 直连",
+        "🚀 默认出站",
+        "🇭🇰 香港专线",
         "📌 单选节点1",
         "📌 单选节点2",
         "📌 单选节点3",
@@ -253,7 +234,8 @@
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
         "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
+        "🇺🇸 美国节点",
+        "⚡ 日韩台新美"
       ],
       "interrupt_exist_connections": true
     },
@@ -263,9 +245,7 @@
       "outbounds": [
         "🐢 直连",
         "🚀 默认出站",
-        "⚡ 日韩新",
-        "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
+        "🇭🇰 香港专线",
         "📌 单选节点1",
         "📌 单选节点2",
         "📌 单选节点3",
@@ -274,7 +254,8 @@
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
         "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
+        "🇺🇸 美国节点",
+        "⚡ 日韩台新美"
       ],
       "interrupt_exist_connections": true
     },
@@ -282,11 +263,9 @@
       "tag": "🎮 Game",
       "type": "selector",
       "outbounds": [
-        "🚀 默认出站",
-        "⚡ 日韩新",
-        "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
         "🐢 直连",
+        "🚀 默认出站",
+        "🇭🇰 香港专线",
         "📌 单选节点1",
         "📌 单选节点2",
         "📌 单选节点3",
@@ -295,7 +274,8 @@
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
         "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
+        "🇺🇸 美国节点",
+        "⚡ 日韩台新美"
       ],
       "interrupt_exist_connections": true
     },
@@ -305,9 +285,7 @@
       "outbounds": [
         "🐢 直连",
         "🚀 默认出站",
-        "⚡ 日韩新",
-        "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
+        "🇭🇰 香港专线",
         "📌 单选节点1",
         "📌 单选节点2",
         "📌 单选节点3",
@@ -316,7 +294,8 @@
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
         "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
+        "🇺🇸 美国节点",
+        "⚡ 日韩台新美"
       ],
       "interrupt_exist_connections": true
     },
@@ -325,9 +304,7 @@
       "type": "selector",
       "outbounds": [
         "🚀 默认出站",
-        "⚡ 日韩新",
-        "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
+        "🇭🇰 香港专线",
         "🐢 直连",
         "📌 单选节点1",
         "📌 单选节点2",
@@ -337,28 +314,8 @@
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
         "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
-      ],
-      "interrupt_exist_connections": true
-    },
-    {
-      "tag": "🥽 Meta",
-      "type": "selector",
-      "outbounds": [
-        "🚀 默认出站",
-        "⚡ 日韩新",
-        "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
-        "🐢 直连",
-        "📌 单选节点1",
-        "📌 单选节点2",
-        "📌 单选节点3",
-        "🇭🇰 香港节点",
-        "🇯🇵 日本节点",
-        "🇰🇷 韩国节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
+        "🇺🇸 美国节点",
+        "⚡ 日韩台新美"
       ],
       "interrupt_exist_connections": true
     },
@@ -366,15 +323,14 @@
       "tag": "🤖 OpenAI",
       "type": "selector",
       "outbounds": [
-        "🤖 ChatGPT解锁",
         "⚡ 日韩台新美",
         "🚀 默认出站",
-        "⚡ 日韩新",
         "🐢 直连",
         "📌 单选节点1",
         "📌 单选节点2",
         "📌 单选节点3",
         "🇭🇰 香港节点",
+        "🇭🇰 香港专线",
         "🇯🇵 日本节点",
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
@@ -387,15 +343,14 @@
       "tag": "🪟 Bing",
       "type": "selector",
       "outbounds": [
-        "🚀 默认出站",
-        "⚡ 日韩新",
         "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
+        "🚀 默认出站",
         "🐢 直连",
         "📌 单选节点1",
         "📌 单选节点2",
         "📌 单选节点3",
         "🇭🇰 香港节点",
+        "🇭🇰 香港专线",
         "🇯🇵 日本节点",
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
@@ -410,9 +365,7 @@
       "outbounds": [
         "🐢 直连",
         "🚀 默认出站",
-        "⚡ 日韩新",
-        "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
+        "🇭🇰 香港专线",
         "📌 单选节点1",
         "📌 单选节点2",
         "📌 单选节点3",
@@ -421,7 +374,8 @@
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
         "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
+        "🇺🇸 美国节点",
+        "⚡ 日韩台新美"
       ],
       "interrupt_exist_connections": true
     },
@@ -431,9 +385,7 @@
       "outbounds": [
         "🐢 直连",
         "🚀 默认出站",
-        "⚡ 日韩新",
-        "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
+        "🇭🇰 香港专线",
         "📌 单选节点1",
         "📌 单选节点2",
         "📌 单选节点3",
@@ -442,7 +394,8 @@
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
         "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
+        "🇺🇸 美国节点",
+        "⚡ 日韩台新美"
       ],
       "interrupt_exist_connections": true
     },
@@ -451,9 +404,7 @@
       "type": "selector",
       "outbounds": [
         "🚀 默认出站",
-        "⚡ 日韩新",
-        "⚡ 日韩台新美",
-        "🤖 ChatGPT解锁",
+        "🇭🇰 香港专线",
         "🐢 直连",
         "📌 单选节点1",
         "📌 单选节点2",
@@ -463,28 +414,8 @@
         "🇰🇷 韩国节点",
         "🇹🇼 台湾节点",
         "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
-      ],
-      "interrupt_exist_connections": true
-    },
-    {
-      "tag": "📷 Imgur",
-      "type": "selector",
-      "outbounds": [
-        "⚡ 日韩台新美",
-        "🚀 默认出站",
-        "⚡ 日韩新",
-        "🤖 ChatGPT解锁",
-        "🐢 直连",
-        "📌 单选节点1",
-        "📌 单选节点2",
-        "📌 单选节点3",
-        "🇭🇰 香港节点",
-        "🇯🇵 日本节点",
-        "🇰🇷 韩国节点",
-        "🇹🇼 台湾节点",
-        "🇸🇬 新加坡节点",
-        "🇺🇸 美国节点"
+        "🇺🇸 美国节点",
+        "⚡ 日韩台新美"
       ],
       "interrupt_exist_connections": true
     },
@@ -500,6 +431,37 @@
           "action": "include",
           "keywords": [
             "🇭🇰|香港|HK|Hong Kong"
+          ]
+        },
+        {
+          "action": "exclude",
+          "keywords": [
+            "专线|iOS优化"
+          ]
+        }
+      ],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "10m",
+      "tolerance": 0
+    },
+    {
+      "tag": "🇭🇰 香港专线",
+      "type": "urltest",
+      "outbounds": [
+        "{all}"
+      ],
+      "interrupt_exist_connections": true,
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇭🇰|香港|HK|Hong Kong"
+          ]
+        },
+        {
+          "action": "include",
+          "keywords": [
+            "专线|iOS优化"
           ]
         }
       ],
@@ -595,6 +557,25 @@
           "action": "include",
           "keywords": [
             "🇺🇸|美国|US|USA|United States"
+          ]
+        }
+      ],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "10m",
+      "tolerance": 0
+    },
+    {
+      "tag": "⚡ 日韩台新美",
+      "type": "urltest",
+      "outbounds": [
+        "{all}"
+      ],
+      "interrupt_exist_connections": true,
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "🇯🇵|日本|JP|Japan|🇰🇷|韩国|KR|South Korea|🇸🇬|新加坡|SG|Singapore|🇹🇼|台湾|TW|Taiwan|🇺🇸|美国|US|USA|United States"
           ]
         }
       ],
@@ -742,13 +723,6 @@
         "outbound": "🔎 Google"
       },
       {
-        "rule_set": [
-          "geoip_facebook",
-          "geosite_meta"
-        ],
-        "outbound": "🥽 Meta"
-      },
-      {
         "process_name": "com.openai.chatgpt",
         "outbound": "🤖 OpenAI"
       },
@@ -786,12 +760,6 @@
           "geosite_telegram"
         ],
         "outbound": "✈️ Telegram"
-      },
-      {
-        "rule_set": [
-          "geosite_imgur"
-        ],
-        "outbound": "📷 Imgur"
       },
       {
         "rule_set": "geosite_geolocation-!cn",
@@ -903,14 +871,6 @@
         "update_interval": "1d"
       },
       {
-        "tag": "geosite_meta",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/meta.srs",
-        "download_detour": "🐢 直连",
-        "update_interval": "1d"
-      },
-      {
         "tag": "geosite_onedrive",
         "type": "remote",
         "format": "binary",
@@ -971,14 +931,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/telegram.srs",
-        "download_detour": "🐢 直连",
-        "update_interval": "1d"
-      },
-      {
-        "tag": "geosite_imgur",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/senzyo/sing-box-rules/master/geosite/imgur.srs",
         "download_detour": "🐢 直连",
         "update_interval": "1d"
       },
